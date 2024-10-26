@@ -66,4 +66,5 @@ input:focus {
   font-weight: 600;
   padding: 1rem 3rem;
   border-radius: 5px;
+  transition: all 0.2s;
 }
