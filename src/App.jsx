@@ -1,13 +1,39 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+
+
 import Product from "./pages/Product";
 import HomePage from "./pages/HomePage.jsx";
 import Pricing from "./pages/pricing.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 import AppLayout from "./pages/AppLayout.jsx";
 import Login from "./pages/Login.jsx";
+import CityList from "./component/CityList.jsx";
+import CountryList from "./component/CountryList.jsx";
 
 export default function App() {
+
+   const BASE_URL = 'http://localhost:8000'
+
+    const[cities,setCities] = useState([]);
+    const [isLoading,setIsLoading] = useState(false);
+    useEffect(() => {
+        async function fetchData(){
+            try{
+                setIsLoading(true)
+                const res = await fetch(`${BASE_URL}/cities`);
+                const data = await res.json();
+                setCities(data);
+            }catch(e){
+                alert(`there was an error loading data`)
+            }finally {
+                setIsLoading(false);
+            }
+        }
+        fetchData();
+    }, []);
+
+
     return (
         <div>
             <BrowserRouter>
@@ -16,14 +42,17 @@ export default function App() {
                     <Route path={'/pricing'} element={<Pricing/>}/>
                     <Route path={"/product"} element={<Product/>}/>
                     <Route path={"/app"} element={<AppLayout/>}>
-                        <Route index element={<p>list of Cities</p>}/>
+                        <Route index element={<CityList cities={cities} loading={isLoading}/>}/>
                         <Route
                             path={"cities"}
-                            element={<p>list of Cities</p>}
+                            element={<CityList cities={cities} loading={isLoading}/>}
                         />
                         <Route
                             path={"countries"}
-                            element={<p>Countries</p>}
+                            element={<CountryList
+                                cities={cities}
+
+                            />}
                         />
                         <Route
                             path={"form"}
