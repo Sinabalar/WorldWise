@@ -10,26 +10,28 @@ import AppLayout from "./pages/AppLayout.jsx";
 import Login from "./pages/Login.jsx";
 import CityList from "./component/CityList.jsx";
 import CountryList from "./component/CountryList.jsx";
+import City from "./component/City.jsx";
 
 export default function App() {
 
-   const BASE_URL = 'http://localhost:8000'
+    const BASE_URL = 'http://localhost:8000'
 
-    const[cities,setCities] = useState([]);
-    const [isLoading,setIsLoading] = useState(false);
+    const [cities, setCities] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
-        async function fetchData(){
-            try{
+        async function fetchData() {
+            try {
                 setIsLoading(true)
                 const res = await fetch(`${BASE_URL}/cities`);
                 const data = await res.json();
                 setCities(data);
-            }catch(e){
+            } catch (e) {
                 alert(`there was an error loading data`)
-            }finally {
+            } finally {
                 setIsLoading(false);
             }
         }
+
         fetchData();
     }, []);
 
@@ -42,10 +44,19 @@ export default function App() {
                     <Route path={'/pricing'} element={<Pricing/>}/>
                     <Route path={"/product"} element={<Product/>}/>
                     <Route path={"/app"} element={<AppLayout/>}>
-                        <Route index element={<CityList cities={cities} loading={isLoading}/>}/>
+                        <Route
+                            index
+                            element={<CityList
+                                cities={cities}
+                                loading={isLoading}/>}
+                        />
                         <Route
                             path={"cities"}
                             element={<CityList cities={cities} loading={isLoading}/>}
+                        />
+                        <Route
+                            path={"cities/:id"}
+                            element={<City/>}
                         />
                         <Route
                             path={"countries"}
