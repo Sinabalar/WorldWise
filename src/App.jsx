@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 
 
 import Product from "./pages/Product";
@@ -11,6 +11,7 @@ import Login from "./pages/Login.jsx";
 import CityList from "./component/CityList.jsx";
 import CountryList from "./component/CountryList.jsx";
 import City from "./component/City.jsx";
+import Form from "./component/Form.jsx";
 
 export default function App() {
 
@@ -46,9 +47,9 @@ export default function App() {
                     <Route path={"/app"} element={<AppLayout/>}>
                         <Route
                             index
-                            element={<CityList
-                                cities={cities}
-                                loading={isLoading}/>}
+                            element={
+                            <Navigate replace to={'cities'}/>
+                            }
                         />
                         <Route
                             path={"cities"}
@@ -67,7 +68,7 @@ export default function App() {
                         />
                         <Route
                             path={"form"}
-                            element={<p>Form</p>}
+                            element={<Form/>}
                         />
                     </Route>
                     <Route path={"/logIn"} element={<Login/>}/>
