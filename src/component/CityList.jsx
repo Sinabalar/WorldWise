@@ -8,9 +8,9 @@ import {useCitiesContext} from "../context/citiesContext.jsx";
 
 export default function CityList() {
 
-    const {cities, loading} = useCitiesContext()
+    const {cities, isLoading} = useCitiesContext()
 
-    if (loading) return <Spinner/>;
+    if (isLoading) return <Spinner/>;
     if(!cities.length) return <Message message={'Add your first city by clicking on a city on the map'}/>;
 
     return (
