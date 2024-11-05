@@ -1,13 +1,13 @@
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents} from "react-leaflet";
 import {useCitiesContext} from "../context/citiesContext.jsx";
+import {useUrlPosition} from "../hooks/useURLPosition.js";
 import styles from './Map.module.css';
 import {useGeolocation} from "../hooks/useGeoLocation.js";
 import Button from "./Button.jsx";
 
 function Map() {
-    const [searchParams] = useSearchParams();
     const [mapPosition, setMapPosition] = useState([38.069909, 46.291185]);
     const {cities} = useCitiesContext();
     const {
@@ -17,8 +17,7 @@ function Map() {
         isOnHomePosition
     } = useGeolocation();
 
-    const mapLat = searchParams.get('lat');
-    const mapLng = searchParams.get('lng');
+    const [mapLat, mapLng] = useUrlPosition();
 
     useEffect(() => {
         if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
@@ -29,11 +28,10 @@ function Map() {
     }, [geoLocationPosition]);
 
 
-
     return (
         <div
             className={styles.mapContainer}
-        >{!isOnHomePosition([geoLocationPosition?.lat,geoLocationPosition?.lng],mapPosition) &&
+        >{!isOnHomePosition([geoLocationPosition?.lat, geoLocationPosition?.lng], mapPosition) &&
             <Button
                 type={'position'}
                 onClick={() => (
