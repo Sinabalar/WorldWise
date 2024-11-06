@@ -8,7 +8,7 @@ function CitiesProvider({children}) {
 
     const [cities, setCities] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [currCity,setCurrCity]=useState({});
+    const [currCity, setCurrCity] = useState({});
 
     useEffect(() => {
         async function fetchData() {
@@ -40,23 +40,45 @@ function CitiesProvider({children}) {
         }
     }
 
+    async function createCity(newCity) {
+        try {
+            setIsLoading(true)
+            const res = await fetch(`${BASE_URL}/cities`, {
+                method: 'POST',
+                body: JSON.stringify(newCity),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await res.json();
+            setCities([...cities, data])
+        } catch (e) {
+            alert(`there was an error loading data`)
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     return (
         <CitiesContext.Provider value={
             {
                 cities,
                 isLoading,
                 getCity,
-                currCity
+                currCity,
+                createCity
             }
         }>
             {children}
         </CitiesContext.Provider>
     )
 }
-function useCitiesContext(){
-    if(useContext(CitiesContext)===undefined){
+
+function useCitiesContext() {
+    if (useContext(CitiesContext) === undefined) {
         throw new Error('CitiesContext created out side of contextProvider');
     }
     return useContext(CitiesContext);
 }
-export {CitiesProvider,useCitiesContext}
+
+export {CitiesProvider, useCitiesContext}
