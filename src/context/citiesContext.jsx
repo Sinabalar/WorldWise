@@ -1,4 +1,5 @@
 import {createContext, useContext, useEffect, useState} from "react";
+import city from "../component/City.jsx";
 
 const CitiesContext = createContext();
 
@@ -53,7 +54,21 @@ function CitiesProvider({children}) {
             const data = await res.json();
             setCities([...cities, data])
         } catch (e) {
-            alert(`there was an error loading data`)
+            alert(`there was an error creating city`)
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    async function deleteCity(id) {
+        try {
+            setIsLoading(true)
+            await fetch(`${BASE_URL}/cities/${id}`, {
+                method: 'DELETE'
+            });
+            setCities(cities.filter((city) => city.id !== id))
+        } catch (e) {
+            alert(`there was an error deleting city`)
         } finally {
             setIsLoading(false);
         }
@@ -66,7 +81,8 @@ function CitiesProvider({children}) {
                 isLoading,
                 getCity,
                 currCity,
-                createCity
+                createCity,
+                deleteCity
             }
         }>
             {children}
