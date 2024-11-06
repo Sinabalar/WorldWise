@@ -1,3 +1,28 @@
 {
-  "cities": []
+  "cities": [
+    {
+      "cityName": "Tehran",
+      "country": "Iran (Islamic Republic of)",
+      "emoji": "🇮🇷",
+      "date": "2024-11-06T15:15:49.177Z",
+      "notes": "",
+      "position": {
+        "lat": "35.72756221127198",
+        "lng": "51.34700775146485"
+      },
+      "id": 1
+    },
+    {
+      "cityName": "Tehran",
+      "country": "Iran (Islamic Republic of)",
+      "emoji": "🇮🇷",
+      "date": "2024-11-06T15:15:54.188Z",
+      "notes": "",
+      "position": {
+        "lat": "35.67988848691441",
+        "lng": "51.335678100585945"
+      },
+      "id": 2
+    }
+  ]
 }
