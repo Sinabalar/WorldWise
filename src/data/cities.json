@@ -1,26 +1,26 @@
 {
   "cities": [
     {
-      "cityName": "Tehran",
-      "country": "Iran (Islamic Republic of)",
-      "emoji": "🇮🇷",
-      "date": "2024-11-06T15:15:49.177Z",
+      "cityName": "Tchirozerine",
+      "country": "Niger (the)",
+      "emoji": "🇳🇪",
+      "date": "2024-11-07T11:32:47.977Z",
       "notes": "",
       "position": {
-        "lat": "35.72756221127198",
-        "lng": "51.34700775146485"
+        "lat": "18.60460138845525",
+        "lng": "5.6689453125"
       },
       "id": 1
     },
     {
-      "cityName": "Tehran",
-      "country": "Iran (Islamic Republic of)",
-      "emoji": "🇮🇷",
-      "date": "2024-11-06T15:15:54.188Z",
+      "cityName": "Durham",
+      "country": "Australia",
+      "emoji": "🇦🇺",
+      "date": "2024-11-07T11:33:24.814Z",
       "notes": "",
       "position": {
-        "lat": "35.67988848691441",
-        "lng": "51.335678100585945"
+        "lat": "-27.68352808378776",
+        "lng": "141.67968750000003"
       },
       "id": 2
     }

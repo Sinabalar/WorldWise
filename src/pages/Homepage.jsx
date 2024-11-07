@@ -1,8 +1,12 @@
 import styles from "./Homepage.module.css";
 import PageNavBar from "../component/PageNavBar.jsx";
 import {Link} from "react-router-dom";
+import {useAuth} from "../context/FakeAuthContext.jsx";
 
 export default function Homepage() {
+
+    const{user} = useAuth();
+
     return (
         <main className={styles.homepage}>
             <PageNavBar/>
@@ -18,7 +22,7 @@ export default function Homepage() {
                     you have wandered the world.
                 </h2>
                 <Link
-                    to={'/app'}
+                    to={'/logIn'}
                     className={'cta'}
                 >Start tracking now
                 </Link>
